@@ -1,27 +1,33 @@
-:root {
-  /* 🎯 Background */
-  --bg-main: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-card: #020617;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-  /* ⚡ Primary (energia) */
-  --primary: #f97316;
-  --primary-hover: #ea580c;
-  --primary-soft: #fdba74;
+:root {
+  /* 🎯 Background (più nero / gaming) */
+  --bg-main: #050505;        /* quasi nero puro */
+  --bg-secondary: #0b0f0c;   /* verde molto scuro */
+  --bg-card: #0f1a14;        /* card con tinta green */
+
+  /* ⚡ Primary (verde energia fitness) */
+  --primary: #22c55e;        /* verde vivo */
+  --primary-hover: #16a34a;  /* verde scuro */
+  --primary-soft: #86efac;   /* verde soft */
 
   /* ⚪ Text */
-  --text-main: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-main: #f1f5f9;      /* quasi bianco */
+  --text-secondary: #86efac; /* leggero green tint */
+  --text-muted: #64748b;     /* grigio freddo */
 
   /* 🧱 Borders */
-  --border: #334155;
-  --border-light: #475569;
+  --border: #14532d;         /* verde scuro */
+  --border-light: #166534;   /* verde leggermente più acceso */
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+body {
+  background: var(--bg-main);
 }
