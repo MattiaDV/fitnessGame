@@ -1,0 +1,27 @@
+:root {
+  /* 🎯 Background */
+  --bg-main: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #020617;
+
+  /* ⚡ Primary (energia) */
+  --primary: #f97316;
+  --primary-hover: #ea580c;
+  --primary-soft: #fdba74;
+
+  /* ⚪ Text */
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* 🧱 Borders */
+  --border: #334155;
+  --border-light: #475569;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
