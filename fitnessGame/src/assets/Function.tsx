@@ -1,8 +1,24 @@
+type playerState = {
+    name: string,
+    done: boolean
+}
+
 let training = {
     "squat": [10, 30, 80],
     "piegamenti": [2, 10, 30],
     "trazioni": [1, 5, 15]
 };
+
+let players: string[] = [];
+export let players_results: playerState[] = [];
+
+export function addPlayerResults(datas: playerState[]) {
+    players_results = [...datas];
+}
+
+export function setPlayersTotals(datas: string[]) {
+    players = [...datas];
+}
 
 export let data_game = {
     "difficoltà": "",
@@ -36,12 +52,29 @@ export function calculate_training() {
     }
 
     if (data_game.tipologia.includes("trazioni")) {
-        return train[2] + " trazioni";
+        return {
+            "train": train[2] + " trazioni",
+            "player": players
+        };
     } else if (data_game.tipologia.includes("squat")) {
-        return train[0] + " squat";
+        return {
+            "train": train[0] + " squat",
+            "player": players
+        };
     } else if (data_game.tipologia.includes("piegamenti")) {
-        return train[1] + " piegamenti";
+        return {
+            "train": train[1] + " piegamenti", 
+            "player": players
+        };
     } else if (data_game.tipologia.includes("full")) {
-        return train[0] + " squat | " + train[1] + " piegamenti | " + train[2] + " trazioni";
+        return {
+            "train": train[0] + " squat | " + train[1] + " piegamenti | " + train[2] + " trazioni",
+            "player": players
+        };
+    }
+
+    return {
+        "train": "none",
+        "player": ["none"]
     }
 }

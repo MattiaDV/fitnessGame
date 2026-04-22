@@ -4,6 +4,7 @@ import { Home } from './assets/Head';
 import { Game } from './assets/Game';
 import { TrainTypes } from './assets/TrainType';
 import { EffectiveGame } from './assets/EffectiveGame';
+import { Winners } from './assets/Winners';
 import { Error404 } from './assets/Errore';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path="/game" element={<Game />} />
       <Route path="/game-type" element={<TrainTypes />} />
       <Route path="/effective-game" element={<EffectiveGame />} />
+      <Route path="/winners" element={<Winners />} />
       <Route path="*" element={<Error404 />} />
     </Routes>
   )
