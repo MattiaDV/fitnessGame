@@ -109,7 +109,7 @@ export function calculate_training() {
         return {
             "train": train[0] + " squat | " + train[1] + " piegamenti | " + train[2] + " trazioni",
             "player": players,
-            "timer": 0
+            "timer": 5
         };
     } else if (data_game.tipologia.includes("full") && data_game.difficoltà.includes("intermedio")) {
         return {
