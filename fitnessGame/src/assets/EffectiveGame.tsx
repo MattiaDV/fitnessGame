@@ -1,10 +1,12 @@
 import { calculate_training, addPlayerResults } from "./Function";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Timer } from "./timer";
 
 type trainInt = {
     train: string,
-    player: string[]
+    player: string[],
+    timer: number
 }
 
 type playerState = {
@@ -44,6 +46,9 @@ export function EffectiveGame() {
             <h1 className="text-[var(--text-main)] text-[20px]">Devi fare: <br /><p className="w-[250px]">
                 {train.train}
             </p></h1>
+
+            <h1 className="text-[var(--text-main)]">{ train.timer == 0 ? "" : <Timer time={train.timer} /> }</h1>
+
             <ul>
                 {
                     playerState.map((pl, index) => (

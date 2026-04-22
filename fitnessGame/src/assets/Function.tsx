@@ -51,30 +51,83 @@ export function calculate_training() {
         train[2] = training.trazioni[2];
     }
 
-    if (data_game.tipologia.includes("trazioni")) {
+    if (data_game.tipologia.includes("trazioni") && data_game.difficoltà.includes("facile")) {
         return {
             "train": train[2] + " trazioni",
-            "player": players
+            "player": players,
+            "timer": 0
         };
-    } else if (data_game.tipologia.includes("squat")) {
+    } else if (data_game.tipologia.includes("trazioni") && data_game.difficoltà.includes("intermedio")) {
+        return {
+            "train": train[2] + " trazioni",
+            "player": players,
+            "timer": 3
+        };
+    } else if (data_game.tipologia.includes("trazioni") && data_game.difficoltà.includes("difficile")) {
+        return {
+            "train": train[2] + " trazioni",
+            "player": players,
+            "timer": 3
+        };
+    } else if (data_game.tipologia.includes("squat") && data_game.difficoltà.includes("facile")) {
         return {
             "train": train[0] + " squat",
-            "player": players
+            "player": players,
+            "timer": 0
         };
-    } else if (data_game.tipologia.includes("piegamenti")) {
+    } else if (data_game.tipologia.includes("squat") && data_game.difficoltà.includes("intermedio")) {
+        return {
+            "train": train[0] + " squat",
+            "player": players,
+            "timer": 5
+        };
+    } else if (data_game.tipologia.includes("squat") && data_game.difficoltà.includes("difficile")) {
+        return {
+            "train": train[0] + " squat",
+            "player": players,
+            "timer": 7
+        };
+    } else if (data_game.tipologia.includes("piegamenti") && data_game.difficoltà.includes("facile")) {
         return {
             "train": train[1] + " piegamenti", 
-            "player": players
+            "player": players,
+            "timer": 0
         };
-    } else if (data_game.tipologia.includes("full")) {
+    } else if (data_game.tipologia.includes("piegamenti") && data_game.difficoltà.includes("intermedio")) {
+        return {
+            "train": train[1] + " piegamenti", 
+            "player": players,
+            "timer": 3
+        };
+    } else if (data_game.tipologia.includes("piegamenti") && data_game.difficoltà.includes("difficile")) {
+        return {
+            "train": train[1] + " piegamenti", 
+            "player": players,
+            "timer": 5
+        };
+    } else if (data_game.tipologia.includes("full") && data_game.difficoltà.includes("facile")) {
         return {
             "train": train[0] + " squat | " + train[1] + " piegamenti | " + train[2] + " trazioni",
-            "player": players
+            "player": players,
+            "timer": 0
+        };
+    } else if (data_game.tipologia.includes("full") && data_game.difficoltà.includes("intermedio")) {
+        return {
+            "train": train[0] + " squat | " + train[1] + " piegamenti | " + train[2] + " trazioni",
+            "player": players,
+            "timer": 8
+        };
+    } else if (data_game.tipologia.includes("full") && data_game.difficoltà.includes("difficile")) {
+        return {
+            "train": train[0] + " squat | " + train[1] + " piegamenti | " + train[2] + " trazioni",
+            "player": players,
+            "timer": 10
         };
     }
 
     return {
         "train": "none",
-        "player": ["none"]
+        "player": ["none"],
+        "timer": 0
     }
 }
