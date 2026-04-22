@@ -11,34 +11,41 @@ type trainInt = {
 
 type playerState = {
     name: string,
-    done: boolean
+    done: boolean,
+    time: number
 }
 
 export function EffectiveGame() {
-    let train: trainInt = calculate_training();
+    const [train] = useState<trainInt>(() => calculate_training());
+    const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const navigate = useNavigate();
+    const [elapsed, setElapsed] = useState(0);
 
-    let [playerState, setPlayerState] = useState<playerState[]>(
+    const [playerState, setPlayerState] = useState<playerState[]>(
         train.player.map(p => ({
             name: p,
-            done: false
+            done: false,
+            time: 0
         }))
     );
 
-    function togglePlayer(index: number) {
-        setPlayerState(prev => {
-            const updated = prev.map((p, i) => 
-                i === index ? { ...p, done: !p.done } : p
-            );
+    const currentPlayer = playerState[currentPlayerIndex];
 
-            addPlayerResults(updated);
+    function completeTurn(elapsed?: number) {
+        if (currentPlayer.done) return;
 
-            return updated;
-        })
-    }
+        const updated = playerState.map((p, i) =>
+            i === currentPlayerIndex ? { ...p, done: true, time: elapsed ?? train.timer * 60} : p
+        );
 
-    function viewWinner() {
-        navigate("/winners");
+        setPlayerState(updated);
+        addPlayerResults(updated);
+
+        if (currentPlayerIndex + 1 >= playerState.length) {
+            navigate("/winners");
+            return;
+        }
+        setCurrentPlayerIndex(prev => prev + 1);
     }
 
     return <>
@@ -47,17 +54,26 @@ export function EffectiveGame() {
                 {train.train}
             </p></h1>
 
-            <h1 className="text-[var(--text-main)]">{ train.timer == 0 ? "" : <Timer time={train.timer} /> }</h1>
+            <h1 className="text-[var(--text-main)]">{ train.timer !== 0 && (
+                <Timer
+                    key={currentPlayerIndex}
+                    time={train.timer}
+                    onTick={(e) => setElapsed(e)}
+                    onEnd={(e) => completeTurn(e)}
+                />
+            )}</h1>
 
-            <ul>
-                {
-                    playerState.map((pl, index) => (
-                        <li key={index} className="text-[20px] p-[2px] ">
-                            <input type="checkbox" checked={pl.done} onChange={() => togglePlayer(index)} /> - {pl.name}</li>
-                    ))
-                }
-            </ul>
-            <button onClick={() => viewWinner()} className="hover:bg-[var(--primary)] hover:text-[var(--bg-main)] transition-all duration-[400ms] w-full md:w-[300px] bg-[var(--bg-main)] border border-[var(--primary)] p-[10px] text-[20px] rounded-[10px] text-[var(--primary)]">Winner</button>
+            <h2 className="text-[25px]">
+                Turno di: {currentPlayer.name}
+            </h2>
+
+            <button 
+                className="hover:bg-[var(--primary)] hover:text-[var(--bg-main)] transition-all duration-[400ms] w-full md:w-[300px] bg-[var(--bg-main)] border border-[var(--primary)] p-[10px] text-[20px] rounded-[10px] text-[var(--primary)]"
+                onClick={() => completeTurn(elapsed)}
+                disabled={currentPlayer.done}
+            >
+                Ho finito
+            </button>
         </div>
     </>
 }

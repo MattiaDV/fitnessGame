@@ -3,6 +3,7 @@ import { players_results } from "./Function";
 
 export function Winners() {
     const navigate = useNavigate();
+    console.log(players_results);
 
     function returnHome() {
         navigate("/");
@@ -19,9 +20,9 @@ export function Winners() {
 
                 <ul className="mb-[15px] text-center">
                     {players_results
-                        .filter(p => p.done)
+                        .sort((a, b) => a.time - b.time)
                         .map((p, i) => (
-                            <li key={i} className="text-[20px] text-[var(--text-main)]">- {p.name}</li>
+                            <li key={i} className="text-[20px] text-[var(--text-main)]">{i + 1}°) {p.name} - tempo: {p.time} Secondi</li>
                         ))}
                 </ul>
 

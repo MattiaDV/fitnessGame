@@ -1,6 +1,7 @@
 type playerState = {
     name: string,
-    done: boolean
+    done: boolean,
+    time: number
 }
 
 let training = {
@@ -55,7 +56,7 @@ export function calculate_training() {
         return {
             "train": train[2] + " trazioni",
             "player": players,
-            "timer": 0
+            "timer": 3
         };
     } else if (data_game.tipologia.includes("trazioni") && data_game.difficoltà.includes("intermedio")) {
         return {
@@ -73,7 +74,7 @@ export function calculate_training() {
         return {
             "train": train[0] + " squat",
             "player": players,
-            "timer": 0
+            "timer": 3
         };
     } else if (data_game.tipologia.includes("squat") && data_game.difficoltà.includes("intermedio")) {
         return {
@@ -91,7 +92,7 @@ export function calculate_training() {
         return {
             "train": train[1] + " piegamenti", 
             "player": players,
-            "timer": 0
+            "timer": 5
         };
     } else if (data_game.tipologia.includes("piegamenti") && data_game.difficoltà.includes("intermedio")) {
         return {

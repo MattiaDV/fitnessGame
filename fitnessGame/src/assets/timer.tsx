@@ -1,26 +1,36 @@
 import { useEffect, useRef, useState } from "react";
 
 type TimerProps = {
-    time: number;
+    time: number,
+    onEnd?: (elapsed: number) => void,
+    onTick?: (elapsed: number) => void
 };
 
-export function Timer({ time }: TimerProps) {
+export function Timer({ time, onEnd, onTick }: TimerProps) {
     const [seconds, setSeconds] = useState(time * 60);
     const [isRunning, setIsRunning] = useState(false);
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
+    const startTime = useRef<number | null>(null);
+    const elapsedBeforePause = useRef(0);
 
     const intervalRef = useRef<number | null>(null);
 
     function start() {
         if (intervalRef.current !== null) return;
 
+        startTime.current = Date.now();
         setIsRunning(true);
         intervalRef.current = setInterval(() => {
             setSeconds(prev => {
+                const currentElapsed = elapsedBeforePause.current + Math.floor((Date.now() - startTime.current!) / 1000);
+                onTick?.(currentElapsed);
+
                 if (prev <= 1) {
                     clearInterval(intervalRef.current!);
                     intervalRef.current = null;
+                    setIsRunning(false);
+                    onEnd?.(currentElapsed);
                     return 0;
                 }
                 return prev - 1;
@@ -32,6 +42,8 @@ export function Timer({ time }: TimerProps) {
         if (intervalRef.current !== null) {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
+
+            elapsedBeforePause.current += Math.floor((Date.now() - startTime.current!) / 1000);
         }
         setIsRunning(false);
     }
@@ -39,6 +51,7 @@ export function Timer({ time }: TimerProps) {
     function reset() {
         stop();
         setSeconds(time * 60);
+        startTime.current = null;
     }
 
     useEffect(() => {
