@@ -18,7 +18,8 @@ export function Winners() {
             <div className="flex flex-col w-[90%] m-[0_auto] h-[100vh] justify-center items-center text-center">
                 <h1 className="text-[var(--text-secondary)] text-[60px]">I vincitori!</h1>
 
-                <ul className="mb-[15px] text-center">
+                <ul className="mb-[25px] text-center p-[10px] border border-[var(--primary)] bg-[var(--bg-card)] rounded-[10px]">
+                    <li className="text-[30px] text-[var(--text-main)]">CLASSIFICA</li>
                     {players_results
                         .sort((a, b) => a.time - b.time)
                         .map((p, i) => (

@@ -50,11 +50,15 @@ export function EffectiveGame() {
 
     return <>
         <div className="w-[90%] m-[0_auto] h-[100vh] flex flex-col justify-center items-center text-[var(--text-main)] gap-[10px] text-center">
+            <h2 className="text-[25px] fixed top-[0px] left-[50%] translate-x-[-50%] w-[100%] p-[20px] bg-[var(--primary)] text-[var(--bg-main)]">
+                Turno di: {currentPlayer.name}
+            </h2>
+
             <h1 className="text-[var(--text-main)] text-[20px]">Devi fare: <br /><p className="w-[250px]">
                 {train.train}
             </p></h1>
 
-            <h1 className="text-[var(--text-main)]">{ train.timer !== 0 && (
+            <h1 className="text-[var(--text-main)] mb-[30%] md:mb-[5%]">{ train.timer !== 0 && (
                 <Timer
                     key={currentPlayerIndex}
                     time={train.timer}
@@ -63,12 +67,8 @@ export function EffectiveGame() {
                 />
             )}</h1>
 
-            <h2 className="text-[25px]">
-                Turno di: {currentPlayer.name}
-            </h2>
-
             <button 
-                className="hover:bg-[var(--primary)] hover:text-[var(--bg-main)] transition-all duration-[400ms] w-full md:w-[300px] bg-[var(--bg-main)] border border-[var(--primary)] p-[10px] text-[20px] rounded-[10px] text-[var(--primary)]"
+                className="hover:bg-[var(--primary)] text-[50px] fixed bottom-[0px] left-[0px] hover:text-[var(--bg-main)] transition-all duration-[400ms] w-full h-[30%] bg-[var(--bg-main)] border border-[var(--primary)] p-[10px] text-[20px] rounded-[10px] text-[var(--primary)]"
                 onClick={() => completeTurn(elapsed)}
                 disabled={currentPlayer.done}
             >
