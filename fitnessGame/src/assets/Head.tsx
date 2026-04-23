@@ -14,6 +14,7 @@ export function Home() {
                 <div className="w-[100%] h-[100vh] flex flex-col gap-[10px] text-center items-center justify-center">
                     <h1 className="text-[60px] font-light">Fitness<span className="text-[var(--primary)]">Game</span></h1>
                     <p className="text-[30px] text-[var(--text-muted)]">Sfida i tuoi amici in challenge da palestrati!</p>
+                    <button onClick={redirectToGame} className="w-[100%] md:w-[300px] text-[20px] text-[var(--primary)] bg-[var(--bg-main)] p-[10px] border-[1px] border-[var(--primary)] rounded-[10px] hover:bg-[var(--primary)] hover:text-[var(--bg-main)] duration-[400ms] transition-all mt-[20px]">Gioca ora!</button>
                 </div>
 
                 <div className="mb-[20px] text-center flex flex-col justify-center items-center gap-[10px] w-full">
